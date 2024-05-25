@@ -1,0 +1,445 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>{% block title %}CanHub{% endblock %}</title>
+        <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css" integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+        <link href="{% static 'network/styles.css' %}" rel="stylesheet">
+        <link rel="shortcut icon" href="{% static 'network/Images/favicon.ico' %}">
+        <script type="text/javascript" src="{% static 'network/layout.js' %}"></script>
+        {% block head %}
+        {% endblock %}
+    </head>
+    <body>
+
+        
+        <div class="popup">
+            <div class="small-popup">
+                <div style="margin-bottom: 10px; font-size: 1.1em;"><strong>Delete Post?</strong></div>
+                <div class="grey" style="font-size: .85em; margin-bottom: 15px;">
+                    This can’t be undone and it will be removed from your profile, the timeline of any accounts that follow you, and from Network search results.
+                </div>
+                <div style="padding: 0px 5%;">
+                    <button class="btn btn-light float-left" onclick="remove_popup()">Cancel</button>
+                    <button class="btn btn-danger float-right" id="delete_post_btn">Delete</button>
+                </div>
+            </div>
+            <div class="large-popup">
+                <div>
+                    <div>
+                        <div class="small-profilepic" style="background-image: url(/media/{{user.profile_pic}});"></div>
+                    </div>
+                    <div class="form-area">
+                        <form action="{% url 'createpost' %}" method="POST" class="newpost" enctype="multipart/form-data">
+                            {% csrf_token %}
+                            <textarea name="text" autofocus placeholder="What's happening?" rows="5" id="post-text"></textarea>
+                            <input type="hidden" id="img-change" value="false"></input>
+                            <div id='img-div'>
+                                <button id="del-img" type='button'>
+                                    <svg width="1.55em" height="1.55em" viewBox="0 0 24 24" class="r-jwli3a r-4qtqp9 r-yyyyoo r-1q142lx r-50lct3 r-dnmrzs r-bnwqim r-1plcrui r-lrvibr r-1srniue" fill="#fff">
+                                        <g><path d="M13.414 12l5.793-5.793c.39-.39.39-1.023 0-1.414s-1.023-.39-1.414 0L12 10.586 6.207 4.793c-.39-.39-1.023-.39-1.414 0s-.39 1.023 0 1.414L10.586 12l-5.793 5.793c-.39.39-.39 1.023 0 1.414.195.195.45.293.707.293s.512-.098.707-.293L12 13.414l5.793 5.793c.195.195.45.293.707.293s.512-.098.707-.293c.39-.39.39-1.023 0-1.414L13.414 12z"></path></g>
+                                    </svg>
+                                </button>
+                                <img src="{% static 'network/Images/spinner.gif' %}" id='spinner' height="70px">
+                            </div>
+                            <hr>
+                            <div class="form-action-btns">
+                                <div>
+                                    <input name='picture' accept="image/jpeg,image/png,image/webp,image/gif" type="file" style="display: none;" id="insert-img" data-focusable="true">
+                                    <label for="insert-img" class="icon-btn form-icon-btn"> 
+                                        <svg width="1.1em" height="1.4em" viewBox="0 0 16 16" class="bi bi-image" fill="currentColor" xmlns="http://www.w3.org/2000/svg" style="margin-left:2px">
+                                            <path fill-rule="evenodd" d="M14.002 2h-12a1 1 0 0 0-1 1v10a1 1 0 0 0 1 1h12a1 1 0 0 0 1-1V3a1 1 0 0 0-1-1zm-12-1a2 2 0 0 0-2 2v10a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V3a2 2 0 0 0-2-2h-12z"/>
+                                            <path d="M10.648 7.646a.5.5 0 0 1 .577-.093L15.002 9.5V14h-14v-2l2.646-2.354a.5.5 0 0 1 .63-.062l2.66 1.773 3.71-3.71z"/>
+                                            <path fill-rule="evenodd" d="M4.502 7a1.5 1.5 0 1 0 0-3 1.5 1.5 0 0 0 0 3z"/>
+                                        </svg><span style="font-size: 0.95em;">&nbsp;Photo</span>
+                                    </label>
+                                </div>
+                                <div>
+                                    <button class="btn btn-light float-right cancel-post" type="button" onclick="remove_popup()">Cancel</button>
+                                    <input type="submit" class="btn btn-success float-right submit-btn" value="&nbsp;Post&nbsp;" disabled>
+                                </div>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            <div class="login-popup">
+                <div onclick="remove_popup()" class="icon-btn">
+                    <svg width="1.6em" height="1.6em" viewBox="0 0 16 16" class="bi bi-x" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                        <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+                        <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+                    </svg>
+                </div>
+                <center>
+                    <div class="icon-div">
+                        <svg width="2.5em" height="2.5em" viewBox="0 0 16 16" class="bi bi-heart-fill" fill="#e0245e" xmlns="http://www.w3.org/2000/svg">
+                            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+                        </svg>
+                    </div>
+                    <div class="main_text-div">
+                        <h2></h2>
+                        <div class="grey">
+                            Join Network today to connect with people you know.
+                        </div>
+                    </div>
+                    <div class="btn-div">
+                        <button class="btn btn-success btn-block" onclick="goto_register()">Sign Up</button>
+                        <button class="btn btn-outline-success btn-block" onclick="goto_login()">Login</button>
+                    </div>
+                </center>
+            </div>
+        </div>
+        <div class="body" data-page="{{page}}">
+            <div class="sidenav" style="background-color: #e6ecf0;">
+                <a href="{% url 'index' %}" class="navbar-brand">
+                    <img src="{% static 'network/Images/logo-no-background.png' %}" height="45px">
+                </a>
+                <div style="height: 100%;">
+                    <div>
+                        <div>
+                            <ul>
+                                <li class="nav-item" id="home">
+                                    <a href="{% url 'website-home' %}" class="nav-link">
+                                        <div>
+                                            <svg width="1.5em" height="1.5em" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                                <path d="M22 22L2 22" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                                                <path d="M2 11L6.06296 7.74968M22 11L13.8741 4.49931C12.7784 3.62279 11.2216 3.62279 10.1259 4.49931L9.34398 5.12486" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                                                <path d="M15.5 5.5V3.5C15.5 3.22386 15.7239 3 16 3H18.5C18.7761 3 19 3.22386 19 3.5V8.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                                                <path d="M4 22V9.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                                                <path d="M20 9.5V13.5M20 22V17.5" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round"/>
+                                                <path d="M15 22V17C15 15.5858 15 14.8787 14.5607 14.4393C14.1213 14 13.4142 14 12 14C10.5858 14 9.87868 14 9.43934 14.4393M9 22V17" stroke="#1C274C" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                                <path d="M14 9.5C14 10.6046 13.1046 11.5 12 11.5C10.8954 11.5 10 10.6046 10 9.5C10 8.39543 10.8954 7.5 12 7.5C13.1046 7.5 14 8.39543 14 9.5Z" stroke="#1C274C" stroke-width="1.5"/>
+                                                </svg>
+                                            &nbsp;&nbsp;Back Home
+                                        </div>
+                                    </a>
+                                    </li>
+
+                                <li class="nav-item" id="all_posts">
+                                <a href="{% url 'index' %}" class="nav-link">
+                                    <div>
+                                        <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-card-heading" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                            <path fill-rule="evenodd" d="M14.5 3h-13a.5.5 0 0 0-.5.5v9a.5.5 0 0 0 .5.5h13a.5.5 0 0 0 .5-.5v-9a.5.5 0 0 0-.5-.5zm-13-1A1.5 1.5 0 0 0 0 3.5v9A1.5 1.5 0 0 0 1.5 14h13a1.5 1.5 0 0 0 1.5-1.5v-9A1.5 1.5 0 0 0 14.5 2h-13z"/>
+                                            <path fill-rule="evenodd" d="M3 8.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 0 1h-9a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h6a.5.5 0 0 1 0 1h-6a.5.5 0 0 1-.5-.5z"/>
+                                            <path d="M3 5.5a.5.5 0 0 1 .5-.5h9a.5.5 0 0 1 .5.5v1a.5.5 0 0 1-.5.5h-9a.5.5 0 0 1-.5-.5v-1z"/>
+                                        </svg>
+                                        &nbsp;&nbsp;All Posts
+                                    </div>
+                                </a>
+                                </li>
+                                {% if user.is_authenticated %}
+                                    <li class="nav-item" id="following">
+                                        <a href="{% url 'following' %}" class="nav-link">
+                                            <div>
+                                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-people" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M15 14s1 0 1-1-1-4-5-4-5 3-5 4 1 1 1 1h8zm-7.995-.944v-.002.002zM7.022 13h7.956a.274.274 0 0 0 .014-.002l.008-.002c-.002-.264-.167-1.03-.76-1.72C13.688 10.629 12.718 10 11 10c-1.717 0-2.687.63-3.24 1.276-.593.69-.759 1.457-.76 1.72a1.05 1.05 0 0 0 .022.004zm7.973.056v-.002.002zM11 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zM6.936 9.28a5.88 5.88 0 0 0-1.23-.247A7.35 7.35 0 0 0 5 9c-4 0-5 3-5 4 0 .667.333 1 1 1h4.216A2.238 2.238 0 0 1 5 13c0-1.01.377-2.042 1.09-2.904.243-.294.526-.569.846-.816zM4.92 10c-1.668.02-2.615.64-3.16 1.276C1.163 11.97 1 12.739 1 13h3c0-1.045.323-2.086.92-3zM1.5 5.5a3 3 0 1 1 6 0 3 3 0 0 1-6 0zm3-2a2 2 0 1 0 0 4 2 2 0 0 0 0-4z"/>
+                                                </svg>
+                                                &nbsp;&nbsp;Following
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" id="saved">
+                                        <a href="{% url 'saved' %}" class="nav-link">
+                                            <div>
+                                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-bookmark" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M8 12l5 3V3a2 2 0 0 0-2-2H5a2 2 0 0 0-2 2v12l5-3zm-4 1.234l4-2.4 4 2.4V3a1 1 0 0 0-1-1H5a1 1 0 0 0-1 1v10.234z"/>
+                                                  </svg>
+                                                &nbsp;&nbsp;Saved
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" id="profile">
+                                        <a href="{% url 'profile' user.username %}" class="nav-link">
+                                            <div>
+                                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M13 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM3.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM8 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0z"/>
+                                                </svg>
+                                                &nbsp;&nbsp;Profile
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" id="chat">
+                                        <a href="{% url 'chat_online' %}" class="nav-link">
+                                            <div>
+                                                <svg version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" 
+                                                viewBox="0 0 512 512" xml:space="preserve" width="24px" height="24px">
+                                               <path style="fill:#78D0E8;" d="M416.944,130.016l92.494,89.766C491.842,95.552,385.088,0,256,0C114.615,0,0,114.615,0,256
+                                                   c0,139.851,112.147,253.493,251.414,255.942l-155.95-152.71L416.944,130.016z"/>
+                                               <path style="fill:#4CBCD6;" d="M509.438,219.782l-92.494-89.766L95.464,359.232l155.95,152.71c1.527,0.027,3.053,0.058,4.586,0.058
+                                                   c141.385,0,256-114.615,256-256C512,243.704,511.114,231.616,509.438,219.782z"/>
+                                               <g>
+                                                   <polygon style="fill:#FFFFFF;" points="362.736,347.888 362.736,441.272 244.448,347.888 	"/>
+                                                   <path style="fill:#FFFFFF;" d="M404.76,363.872H107.24c-9.552,0-17.376-7.816-17.376-17.376V142.368
+                                                       c0-9.552,7.816-17.376,17.376-17.376h297.512c9.552,0,17.376,7.816,17.376,17.376v204.136
+                                                       C422.128,356.056,414.312,363.872,404.76,363.872z"/>
+                                               </g>
+                                               <circle style="fill:#333333;" cx="163.58" cy="196.82" r="36.864"/>
+                                               <g>
+                                                   <path style="fill:#FFFFFF;" d="M146.96,201.944c0,9.176,7.44,16.616,16.616,16.616s16.616-7.44,16.616-16.616H146.96z"/>
+                                                   <circle style="fill:#FFFFFF;" cx="150.43" cy="186.33" r="6.416"/>
+                                                   <circle style="fill:#FFFFFF;" cx="176.71" cy="186.33" r="6.416"/>
+                                               </g>
+                                               <g>
+                                                   <rect x="226.52" y="173.14" style="fill:#CCCBCA;" width="141.57" height="6"/>
+                                                   <rect x="226.52" y="193.82" style="fill:#CCCBCA;" width="141.57" height="6"/>
+                                                   <rect x="226.52" y="214.5" style="fill:#CCCBCA;" width="99.1" height="6"/>
+                                               </g>
+                                               <circle style="fill:#333333;" cx="348.42" cy="296.38" r="36.864"/>
+                                               <g>
+                                                   <path style="fill:#FFFFFF;" d="M365.04,301.504c0,9.176-7.44,16.616-16.616,16.616s-16.616-7.44-16.616-16.616H365.04z"/>
+                                                   <circle style="fill:#FFFFFF;" cx="361.57" cy="285.89" r="6.416"/>
+                                                   <circle style="fill:#FFFFFF;" cx="335.29" cy="285.89" r="6.416"/>
+                                               </g>
+                                               <g>
+                                                   <rect x="143.9" y="272.7" style="fill:#CCCBCA;" width="141.57" height="6"/>
+                                                   <rect x="143.9" y="293.38" style="fill:#CCCBCA;" width="141.57" height="6"/>
+                                                   <rect x="186.38" y="314.05" style="fill:#CCCBCA;" width="99.1" height="6"/>
+                                               </g>
+                                           </svg>
+                                           
+                                                &nbsp;&nbsp;Chat Online
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" id="group">
+                                        <a href="{% url 'group' %}" class="nav-link">
+                                            <div>
+                                                <svg fill="#000000" width="24px" height="24px" version="1.1" id="Layer_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0 0 392.601 392.601" xml:space="preserve">
+                                                    <g>
+                                                        <g>
+                                                            <path d="M117.659,132.85c-29.479,0-53.463,23.984-53.463,53.463s23.984,53.463,53.463,53.463
+                                                                c29.543,0,53.463-23.984,53.463-53.463S147.138,132.85,117.659,132.85z M117.659,217.989c-17.455,0-31.677-14.222-31.677-31.677
+                                                                s14.222-31.677,31.677-31.677s31.677,14.222,31.677,31.677S135.114,217.989,117.659,217.989z"/>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                        <g>
+                                                            <path d="M301.32,192.842c-23.531,0-42.731,19.2-42.731,42.731c0,23.596,19.135,42.731,42.731,42.731
+                                                                c23.596,0,42.731-19.135,42.731-42.731C344.051,211.977,324.916,192.842,301.32,192.842z M301.32,256.518
+                                                                c-11.507,0-20.945-9.374-20.945-20.945s9.438-20.945,20.945-20.945c11.572,0,20.945,9.374,20.945,20.945
+                                                                C322.265,247.08,312.891,256.518,301.32,256.518z"/>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                        <g>
+                                                            <path d="M301.32,292.591c-32.194,0-60.832,17.325-76.994,43.119c-18.554-40.792-59.604-69.495-106.731-69.495
+                                                                c-63.547,0-116.234,51.717-117.592,115.2c-0.065,2.909,1.099,5.818,3.103,7.887c2.069,2.069,4.848,3.232,7.822,3.232h370.166
+                                                                c2.909,0,5.689-1.164,7.822-3.232c2.133-2.069,3.168-4.978,3.103-7.887C390.984,332.478,350.257,292.591,301.32,292.591z
+                                                                M22.758,370.813c6.465-46.545,46.998-82.683,94.901-82.683c47.903,0,88.372,36.137,94.901,82.683H22.758z M233.57,370.813
+                                                                c6.012-31.935,34.327-56.307,67.685-56.307s61.737,24.436,67.685,56.307H233.57z"/>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                        <g>
+                                                            <path d="M274.427,0.066c-65.164,0-118.174,36.913-118.174,82.36c0,22.109,12.541,43.184,34.844,58.505v44.865
+                                                                c0,3.685,1.875,7.111,4.913,9.115c2.78,1.875,7.24,2.069,10.343,0.84l70.4-31.095c64.065-0.776,115.846-37.43,115.846-82.23
+                                                                C392.601,36.979,339.59,0.066,274.427,0.066z M274.427,142.87c-1.552,0-3.038,0.323-4.396,0.905l-57.212,25.277v-34.069
+                                                                c0-3.814-2.004-7.37-5.236-9.244c-18.747-11.507-29.608-27.281-29.608-43.378c0.065-32.776,44.218-60.509,96.452-60.509
+                                                                s96.388,27.733,96.388,60.509C370.815,115.201,326.661,142.87,274.427,142.87z"/>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                        <g>
+                                                            <path d="M219.671,69.238h-5.107c-6.012,0-10.925,4.849-10.925,10.925c0.065,6.077,4.913,10.925,10.925,10.925h5.107
+                                                                c6.012,0,10.925-4.849,10.925-10.925C230.597,74.151,225.748,69.238,219.671,69.238z"/>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                        <g>
+                                                            <path d="M276.948,69.238h-5.107c-6.012,0-10.925,4.849-10.925,10.925c0,6.077,4.978,10.925,10.925,10.925h5.107
+                                                                c6.012,0,10.925-4.849,10.925-10.925C287.873,74.151,283.025,69.238,276.948,69.238z"/>
+                                                        </g>
+                                                    </g>
+                                                    <g>
+                                                        <g>
+                                                            <path d="M334.289,69.238h-5.107c-6.012,0-10.925,4.849-10.925,10.925c0,6.077,4.913,10.925,10.925,10.925h5.107
+                                                                c6.012,0,10.925-4.849,10.925-10.925C345.215,74.151,340.366,69.238,334.289,69.238z"/>
+                                                        </g>
+                                                    </g>
+                                                </svg>
+                                                
+                                                
+                                                &nbsp;&nbsp;Group
+                                            </div>
+                                        </a>
+                                    </li>
+                                
+                                    <li class="nav-item" id="logout">
+                                        <a href="{% url 'logout' %}" class="nav-link">
+                                            <div>
+                                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-door-open" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M1 15.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5zM11.5 2H11V1h.5A1.5 1.5 0 0 1 13 2.5V15h-1V2.5a.5.5 0 0 0-.5-.5z"/>
+                                                    <path fill-rule="evenodd" d="M10.828.122A.5.5 0 0 1 11 .5V15h-1V1.077l-6 .857V15H3V1.5a.5.5 0 0 1 .43-.495l7-1a.5.5 0 0 1 .398.117z"/>
+                                                    <path d="M8 9c0 .552.224 1 .5 1s.5-.448.5-1-.224-1-.5-1-.5.448-.5 1z"/>
+                                                </svg>
+                                                &nbsp;&nbsp;Log Out
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% else %}
+                                    <li class="nav-item" id="login">
+                                        <a href="{% url 'login' %}" class="nav-link">
+                                            <div>
+                                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-door-closed" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M3 2a1 1 0 0 1 1-1h8a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1H4a1 1 0 0 1-1-1V2zm1 0v13h8V2H4z"/>
+                                                    <path d="M7 9a1 1 0 1 1-2 0 1 1 0 0 1 2 0z"/>
+                                                    <path fill-rule="evenodd" d="M1 15.5a.5.5 0 0 1 .5-.5h13a.5.5 0 0 1 0 1h-13a.5.5 0 0 1-.5-.5z"/>
+                                                </svg>
+                                                &nbsp;&nbsp;Log In
+                                            </div>
+                                        </a>
+                                    </li>
+                                    <li class="nav-item" id="Signup">
+                                        <a href="{% url 'register' %}" class="nav-link">
+                                            <div>
+                                                <svg width="1.5em" height="1.5em" viewBox="0 0 16 16" class="bi bi-person-plus" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+                                                    <path fill-rule="evenodd" d="M11 14s1 0 1-1-1-4-6-4-6 3-6 4 1 1 1 1h10zm-9.995-.944v-.002.002zM1.022 13h9.956a.274.274 0 0 0 .014-.002l.008-.002c-.001-.246-.154-.986-.832-1.664C9.516 10.68 8.289 10 6 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664a1.05 1.05 0 0 0 .022.004zm9.974.056v-.002.002zM6 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4zm3-2a3 3 0 1 1-6 0 3 3 0 0 1 6 0zm4.5 0a.5.5 0 0 1 .5.5v2a.5.5 0 0 1-.5.5h-2a.5.5 0 0 1 0-1H13V5.5a.5.5 0 0 1 .5-.5z"/>
+                                                    <path fill-rule="evenodd" d="M13 7.5a.5.5 0 0 1 .5-.5h2a.5.5 0 0 1 0 1H14v1.5a.5.5 0 0 1-1 0v-2z"/>
+                                                </svg>
+                                                &nbsp;&nbsp;Sign Up
+                                            </div>
+                                        </a>
+                                    </li>
+                                {% endif %}
+                            </ul>
+                        </div>
+                        {% if user.is_authenticated %}
+                            <button id="popup-btn" class="btn btn-success new-post-btn" onclick="createpost()">Create Post</button>
+                        {% endif %}
+                    </div>
+                    <div style="position: absolute; bottom: 10px;">
+                        {% if user.is_authenticated %}    
+                            <li class="nav-item sidenav-user">
+                                <a href="{% url 'profile' user.username %}" class="nav-link">
+                                    <div class="user_account">
+                                        <div class="small-profilepic" style="float: left; background-image: url(/media/{{user.profile_pic}})"></div>
+                                        <div style="height: 2.7vw; margin: auto;">
+                                            <div style="margin-top: 4px;"><strong>{{user.first_name}} {{user.last_name}}</strong></div>
+                                            <div class="grey" style="margin-top: 4px;">@{{ user.username }}</div>
+                                        </div>
+                                    </div>
+                                </a>
+                            </li>
+                        {% endif %}
+                        {% if user.is_authenticated %}
+                            <input type="hidden" id="user_is_authenticated" value="True" data-username='{{user.username}}'>
+                        {% else %}
+                            <input type="hidden" id="user_is_authenticated" value="False">
+                        {% endif %}
+                    </div>
+                </div>
+            </div>
+            
+            {% block body %}
+            {% endblock %}
+
+            <div class="right-div">
+                <nav class="head">
+                    <form action="#">
+                        <div class="search-div">
+                            <div>
+                                <svg width="1em" height="1.6em" viewBox="0 0 16 6" class="bi bi-search" fill="#6d7e8c" xmlns="http://www.w3.org/2000/svg">
+                                    <path fill-rule="evenodd" d="M10.442 10.442a1 1 0 0 1 1.415 0l3.85 3.85a1 1 0 0 1-1.414 1.415l-3.85-3.85a1 1 0 0 1 0-1.415z"/>
+                                    <path fill-rule="evenodd" d="M6.5 12a5.5 5.5 0 1 0 0-11 5.5 5.5 0 0 0 0 11zM13 6.5a6.5 6.5 0 1 1-13 0 6.5 6.5 0 0 1 13 0z"/>
+                                </svg>
+                            </div>
+                            <input type="text" name="query" id="search-box" placeholder="Search Network">
+                        </div>
+                    </form>
+                </nav>
+                <div class='right-div-content'>
+                    <div class="space" style="background-color: white;"></div>
+                    {% if user.is_authenticated %}
+                        <div class="suggestion-box">
+                            <div class="suggestion-header">
+                                You might know
+                            </div>
+                            {% for suggestion in suggestions %}
+                                <div class="suggestion-user">
+                                    <div>
+                                        <a href="{% url 'profile' suggestion.username %}">
+                                            <div class="small-profilepic" style="background-image: url(/media/{{suggestion.profile_pic}})"></div>
+                                        </a>
+                                    </div>
+                                    <div class="user-details">
+                                        <a href="{% url 'profile' suggestion.username %}">
+                                            <div id="user-name">
+                                                
+                                                <strong>
+                                                    {{suggestion.first_name}} {{suggestion.last_name}}
+                                                </strong>
+                                            </div>
+                                            <div class="grey">@{{suggestion.username}}</div>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-outline-success" type="button" onclick="follow_user(this,'{{suggestion.username}}','suggestion')">Follow</button>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                    <div style="text-align: center; border-bottom: .5px solid #e6ecf0; padding: 10px 15px;">
+                                        <span class="grey" style="font-size: .9em;">No suggestions available.</span>
+                                    </div>
+                            {% endfor %}
+                            <div class="suggestion-footer">
+                                <a href="#">Show more</a>
+                            </div>
+                        </div>
+                        <div class="suggestion-box" style="margin-top: 12px;">
+                            <div class="suggestion-header">
+                                Groups You May Know
+                            </div>
+                            {% for suggestion in suggestions %}
+                                <div class="suggestion-user">
+                                    <div>
+                                        <a href="{% url 'profile' suggestion.username %}">
+                                            <div class="small-profilepic" style="background-image: url(/media/{{suggestion.profile_pic}})"></div>
+                                        </a>
+                                    </div>
+                                    <div class="user-details">
+                                        <a href="{% url 'profile' suggestion.username %}">
+                                            <div id="user-name">
+                                                
+                                                <strong>
+                                                    {{suggestion.first_name}} {{suggestion.last_name}}
+                                                </strong>
+                                            </div>
+                                            <div class="grey">@{{suggestion.username}}</div>
+                                        </a>
+                                    </div>
+                                    <div>
+                                        <button class="btn btn-outline-success" type="button">Join</button>
+                                    </div>
+                                </div>
+                            {% empty %}
+                                    <div style="text-align: center; border-bottom: .5px solid #e6ecf0; padding: 10px 15px;">
+                                        <span class="grey" style="font-size: .9em;">No suggestions available.</span>
+                                    </div>
+                            {% endfor %}
+                            <div class="suggestion-footer">
+                                <a href="#">Show more</a>
+                            </div>
+                        </div>
+                    {% else %}
+                        <div class="guest-box">
+                            <center>
+                                <div class="guest-header">
+                                    <h5>New to Network?</h5>
+                                </div>
+                                <div class="grey guest-content" style="text-align: justify;">
+                                    To create, edit, delete a post or to engage with our community by leaving a like or comment, please login to
+                                     your account. If you don't have an account yet, please
+                                    Sign up now to get connected with people you know.
+                                </div>
+                                <div class="guest-btn">
+                                    <button class="btn btn-success btn-block" type="button" onclick="goto_register()">Sign Up</button>
+                                </div>
+                            </center>
+                        </div>
+                    {% endif %}
+                </div>
+            </div>
+        </div>
+
+    </body>
+</html>

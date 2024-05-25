@@ -1,0 +1,316 @@
+{% extends "public/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<link href="{% static 'card/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+<!-- Template Main CSS File -->
+<!-- <link href="{% static 'card/assets/css/style.css' %}" rel="stylesheet"> -->
+
+
+
+<!-- Stylesheets -->
+<link href="{% static 'card/css/style.css' %}" rel="stylesheet">
+<link href="{% static 'card/css/slick.css' %}" rel="stylesheet">
+<link href="{% static 'card/css/responsive.css' %}" rel="stylesheet">
+<!--Color Switcher Mockup-->
+<link href="{% static 'card/css/color-switcher-design.css' %}" rel="stylesheet">
+<!--Color Themes-->
+<link id="theme-color-file" href="{% static 'card/css/color-themes/default-theme.css' %}" rel="stylesheet">
+
+
+
+<style>
+body {
+    background: #dad8d8;
+    color: #666666;
+    font-family: "Open Sans", sans-serif;
+}
+
+.featured-services .icon-box {
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: 1;
+}
+.featured-services .icon-box::before {
+  content: "";
+  position: absolute;
+  background: #d9f1f2;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 100%;
+  transition: all 0.3s;
+  z-index: -1;
+}
+.featured-services .icon-box:hover::before {
+  background: #3fbbc0;
+  top: 0;
+  border-radius: 0px;
+}
+.featured-services .icon {
+  margin-bottom: 15px;
+}
+.featured-services .icon i {
+  font-size: 48px;
+  line-height: 1;
+  color: #3fbbc0;
+  transition: all 0.3s ease-in-out;
+}
+.featured-services .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+.featured-services .title a {
+  color: #111;
+}
+.featured-services .description {
+  font-size: 15px;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+.featured-services .icon-box:hover .title a, .featured-services .icon-box:hover .description {
+  color: #fff;
+}
+.featured-services .icon-box:hover .icon i {
+  color: #fff;
+}
+
+
+
+/*Header Middle*/
+.header-middle {
+	padding: 30px;
+}
+.hm-searchbox {
+	display: flex;
+	position: relative;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #e1e1e1;
+	min-width: 638px;
+	height: 45px;
+	float: left;
+}
+.hm-searchbox .nice-select.select-search-category {
+	width: auto;
+	line-height: 43px;
+	height: 43px;
+	margin: 0;
+	border: 0;
+	padding: 0 28px 0 25px;
+	color: #242424;
+	font-size: 13px;
+	border-radius: 15px 0 0 15px;
+	font-family: 'Rubik',sans-serif;
+	font-weight: 400;
+	position: relative;
+}
+.select-search-category ul.list {
+	height: 440px;
+	overflow-y: auto;
+	overscroll-behavior-x: none;
+}
+.hm-searchbox .current::after {
+	content: "";
+	position: absolute;
+	display: block;
+	height: 22px;
+	width: 1px;
+	background: #e1e1e1;
+	top: 10px;
+	right: -10px;
+	font-size: 13px;
+}
+.hm-searchbox .nice-select.select-search-category::before {
+		right: 30px;
+		top: 25px;
+		color: #7e7e7e;
+}
+.hm-searchbox input {
+		font-size: 13px;
+		color: #a5a5a5;
+		height: 45px;
+		background: transparent;
+		border: none;
+		width: 100%;
+		padding: 0 60px 0 33px;
+}
+/*Header Middle Right*/
+.header-middle-right {
+		display: flex;
+		justify-content: flex-end;
+}
+/*Header Middle Wishlist*/
+.hm-wishlist {
+	float: left;
+	margin-right: 25px;
+	position: relative;
+}
+.hm-wishlist > a {
+	border: 1px solid #e1e1e1;
+	font-size: 20px;
+	color: #242424;
+	width: 45px;
+	text-align: center;
+	height: 45px;
+	line-height: 45px;
+	display: block;
+	transition: all 0.3s ease-in-out;
+}
+.hm-wishlist > a:hover {
+	border-color: #fed700;
+	color: #fed700;
+}
+
+button.li-btn {
+	border: none;
+	background: #fed700;
+	color: #242424;
+	font-size: 20px;
+	width: 45px;
+	border-radius: 0 2px 2px 0;
+	height: 45px;
+	line-height: 45px;
+	position: absolute;
+	right: -1px;
+	top: -1px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+button.li-btn:hover {
+	background: #333333;
+	color: #ffffff;
+}
+a.links, 
+a.links-2, 
+a.review-links {
+	background: #fed700 none repeat scroll 0 0;
+	color: #242424;
+	display: inline-block;
+	font-family: Montserrat;
+	font-size: 14px;
+	font-weight: 700;
+	height: 50px;
+	line-height: 50px;
+	position: relative;
+	text-transform: uppercase;
+	transition: all 0.3s ease-in-out 0s;
+	width: 170px;
+	text-align: center;
+}
+a.links:hover,
+a.links-2:hover {
+	background: #333333 none repeat scroll 0 0;
+	color: #fff;
+}
+a.review-links {
+	background: #242424;
+	color: #ffffff;
+	width: 205px;
+	height: 40px;
+	line-height: 40px;
+}
+a.review-links:hover {
+	background: #fed700;
+}
+
+#items-container .row > * {
+    margin-bottom: 20px;
+  }
+
+</style>
+
+
+<section style="margin-top: 2cm; display: flex; justify-content: center; margin-bottom: 0px; padding-bottom: 25px;">
+  <div class="body-wrapper">
+    <header>
+      <div class="col-lg-9 pl-0 ml-sm-15 ml-xs-15">
+        <form id="filter-form" class="hm-searchbox">
+          <select id="cancer-type-select" class="nice-select select-search-category">
+            <option value="0">All</option>
+            {% for unit in cancer_types %}
+              <option value="{{ unit.id }}">{{ unit.cancertype }}</option>
+            {% endfor %}                  
+          </select>
+          <input id="filter-input" type="text" placeholder="Filter by Cancer Type ...">
+          <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+    </header>
+  </div>
+</section>
+
+<section id="featured-services" class="featured-services" style="margin-top: 0px; padding-top: 0px; margin-bottom: 20px; padding-bottom: 20px;">
+  <div class="container" data-aos="fade-up">
+    <div id="items-container" class="row">
+      {% for unit in cancer_types %}
+      <a href="{% url 'website-cancer_types_info' item_id=unit.id %}" class="cad col-md-2 col-lg-2 d-flex align-items-stretch mb-4 mb-lg-4 item"  data-cancer-type="{{ unit.cancertype }}">
+        <div class="icon-box" data-aos="fade-up" data-aos-delay="100">
+          <img style="height: 40px; width: 40px;" src="{% static 'img/tc.png' %}" alt="Awesome Image">
+          <p class="description" style="font-size: 16px;">{{ unit.cancertype }}</p>
+          <!-- <h1 class="description" style="text-align: justify;">{{ unit.cancertype |slice:":-6" }}</h1> -->
+          <!-- <p class="description" style="text-align-last: left;">{{ unit.description |truncatewords:5  }}</p> -->
+        </div>
+      </a>
+      {% endfor %}
+    </div>
+  </div>
+</section>
+
+
+
+  <script src="{% static 'card/assets/vendor/purecounter/purecounter.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/php-email-form/validate.js' %}"></script>
+  <!-- Template Main JS File -->
+  <script src="{% static 'card/assets/js/main.js' %}"></script>
+  <!-- Custom template scripts -->
+  <script src="{% static 'card/assets/js/magister.js' %}"></script>
+
+
+
+  <script src="{% static 'card/js/jquery.js' %}"></script>
+  <script src="{% static 'card/js/popper.min.js' %}"></script>
+  <script src="{% static 'card/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'card/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+  <script src="{% static 'card/js/jquery.fancybox.js' %}"></script>
+  <script src="{% static 'card/js/appear.js' %}"></script>
+  <script src="{% static 'card/js/owl.js' %}"></script>
+  <script src="{% static 'card/js/wow.js' %}"></script>
+  <script src="{% static 'card/js/jquery-ui.js' %}"></script>
+  <script src="{% static 'card/js/script.js' %}"></script>
+  <script src="{% static 'card/js/color-settings.js' %}"></script>
+
+
+  <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
+<script>
+    $(document).ready(function() {
+        $('#filter-input').on('input', function() {
+            var searchText = $(this).val().toLowerCase();
+            $('.card').hide().filter(function() {
+                return $(this).data('cancertype').toLowerCase().includes(searchText);
+            }).show();
+        });
+    });
+</script>
+  
+
+{% endblock content %}

@@ -1,0 +1,77 @@
+{% extends "network/layout2.html" %}
+
+{% load static %}
+
+{% block title %}
+    Sign In | Network
+{% endblock %}
+
+{% block body %}
+<style>
+    body {
+        background-image: url("{% static 'img/bk2.jpg' %}");
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+    }
+</style>
+
+<a href="{% url 'website-home' %}">
+    <img src="{% static 'img/details-2.png' %}" height="400em" style="margin-bottom: 2vh; float: left; margin-right: 10px;">
+</a>
+    <div class="user-box">
+        <div class="card" style="background-color: #fff; padding: 20px; border-radius: 10px;">
+        <div>
+            <center>
+               <a href="{% url 'website-home' %}"> <img src="{% static 'network/Images/logo-color.png' %}" height="45em" style="margin-bottom: 2vh;"></a>
+                <h3>Log in to Network Here</h3><br>
+            </center>
+        </div>
+    
+        {% if item_id %}
+       <form action="{% url 'signin' item_id=item_id %}" method="post" id="signin-form" style="width: 100%;margin-bottom: 5vh;">
+        {% else %}
+        <form action="{% url 'signin' %}" method="post" id="signin-form" style="width: 100%;margin-bottom: 5vh;">
+        {% endif %}
+
+            {% csrf_token %}
+            <div class="form-group">
+                <input class="form-control inp usrnm" type="text" name="username" placeholder="Username" autocomplete="off" autofocus>
+            </div>
+            <div class="form-group">
+                <input class="form-control inp pswd" type="password" name="password" placeholder="Password" autocomplete="off">
+                <span class="star"><small>{{message}}</small></span>
+            </div>
+            <center>
+                <input class="btn btn-primary" type="submit" value="Log in" style="margin-top: 10px; width: 95%;" disabled>
+            </center>
+        </form>
+    
+        <div>
+            <center>
+                Don't have an account?&nbsp;&nbsp;<a href="{% url 'signup' item_id=item_id %}">Sign Up</a>
+            </center>
+        </div>
+    </div>
+ </div>
+
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            document.querySelectorAll(".inp").forEach(input => {
+                input.addEventListener('input', () => {
+                    if ((document.querySelector('.usrnm').value.length === 0) || (document.querySelector('.pswd').value.length === 0)) {
+                        document.querySelector('input[type="submit"]').disabled = true;
+                    }
+                    else {
+                        document.querySelector('input[type="submit"]').disabled = false;
+                    }
+                });
+            });
+        });
+    </script>
+{% endblock %}
+
+
+
+

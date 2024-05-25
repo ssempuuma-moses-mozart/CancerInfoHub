@@ -1,0 +1,123 @@
+{% extends "cancer/base.html" %}
+{% block content %}
+    <!-- income order visit user Start -->
+    <div class="income-order-visit-user-area">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>Primary cancer_units</h2>
+                                <a href="{% url 'cancer_units' 2  %}">
+                                <div class="main-income-phara">
+                                    <p>All List</p>
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span></span><span class="counter">{{primary_cancer_units}}</span></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>Secondary cancer_units</h2>
+                                <a href="{% url 'cancer_units' 3 %}">
+                                <div class="main-income-phara order-cl">
+                                    <p>List</p>
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span class="counter">{{secondary_cancer_units}}</span></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>Tertiaries</h2>
+                                <a href="{% url 'cancer_units' 4 %}">
+                                <div class="main-income-phara visitor-cl">
+                                    <p>View</p>
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span class="counter">{{tertiary_cancer_units}}</span></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <div class="income-title">
+                            <div class="main-income-head">
+                                <h2>Universities</h2>
+                                <a href="{% url 'cancer_units' 5 %}">
+                                <div class="main-income-phara low-value-cl">
+                                    <p>View List</p>
+                                </div>
+                                </a>
+                            </div>
+                        </div>
+                        <div class="income-dashone-pro">
+                            <div class="income-rate-total">
+                                <div class="price-adminpro-rate">
+                                    <h3><span class="counter">{{universities}}</span></h3>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <canvas id="primary"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <canvas id="secondary"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <canvas id="tertiary"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-3">
+                    <div class="income-dashone-total shadow-reset nt-mg-b-30">
+                        <canvas id="university"></canvas>
+                    </div>
+                </div>
+ 
+            </div>
+        </div>
+    </div>
+    <!-- welcome Project, sale area start-->
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.9.3/dist/Chart.min.js"></script>
+<script>
+
+  </script>
+    {% endblock content %}
+

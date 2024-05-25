@@ -1,0 +1,950 @@
+{% extends "public/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<link href="{% static 'card/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+<!-- Template Main CSS File -->
+<!-- <link href="{% static 'card/assets/css/style.css' %}" rel="stylesheet"> -->
+
+
+
+<!-- Stylesheets -->
+<link href="{% static 'card/css/style.css' %}" rel="stylesheet">
+<link href="{% static 'card/css/slick.css' %}" rel="stylesheet">
+<link href="{% static 'card/css/responsive.css' %}" rel="stylesheet">
+<!--Color Switcher Mockup-->
+<link href="{% static 'card/css/color-switcher-design.css' %}" rel="stylesheet">
+<!--Color Themes-->
+<link id="theme-color-file" href="{% static 'card/css/color-themes/default-theme.css' %}" rel="stylesheet">
+
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+
+
+<style>
+body {
+    background: #dad8d8;
+    color: #666666;
+    font-family: "Open Sans", sans-serif;
+}
+
+.featured-services .icon-box {
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: 1;
+}
+.featured-services .icon-box::before {
+  content: "";
+  position: absolute;
+  background: #d9f1f2;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 100%;
+  transition: all 0.3s;
+  z-index: -1;
+}
+.featured-services .icon-box:hover::before {
+  background: #3fbbc0;
+  top: 0;
+  border-radius: 0px;
+}
+.featured-services .icon {
+  margin-bottom: 15px;
+}
+.featured-services .icon i {
+  font-size: 48px;
+  line-height: 1;
+  color: #3fbbc0;
+  transition: all 0.3s ease-in-out;
+}
+.featured-services .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+.featured-services .title a {
+  color: #111;
+}
+.featured-services .description {
+  font-size: 15px;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+.featured-services .icon-box:hover .title a, .featured-services .icon-box:hover .description {
+  color: #fff;
+}
+.featured-services .icon-box:hover .icon i {
+  color: #fff;
+}
+
+
+/*--------------------------------------------------------------
+# Doctors
+--------------------------------------------------------------*/
+.doctors {
+  background: #fff;
+}
+.doctors .member {
+  position: relative;
+  box-shadow: 0px 2px 15px rgba(44, 73, 100, 0.08);
+  padding: 30px;
+  border-radius: 10px;
+}
+.doctors .member .pic {
+  overflow: hidden;
+  width: 180px;
+  border-radius: 50%;
+}
+.doctors .member .pic img {
+  transition: ease-in-out 0.3s;
+}
+.doctors .member:hover img {
+  transform: scale(1.1);
+}
+.doctors .member .member-info {
+  padding-left: 30px;
+}
+.doctors .member h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 20px;
+  color: #2c4964;
+}
+.doctors .member span {
+  display: block;
+  font-size: 15px;
+  padding-bottom: 10px;
+  position: relative;
+  font-weight: 500;
+}
+.doctors .member span::after {
+  content: "";
+  position: absolute;
+  display: block;
+  width: 50px;
+  height: 1px;
+  background: #b2c8dd;
+  bottom: 0;
+  left: 0;
+}
+.doctors .member p {
+  margin: 10px 0 0 0;
+  font-size: 14px;
+}
+.doctors .member .social {
+  margin-top: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+}
+.doctors .member .social a {
+  transition: ease-in-out 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50px;
+  width: 32px;
+  height: 32px;
+  background: #a0bcd5;
+}
+.doctors .member .social a i {
+  color: #fff;
+  font-size: 16px;
+  margin: 0 2px;
+}
+.doctors .member .social a:hover {
+  background: #1977cc;
+}
+.doctors .member .social a + a {
+  margin-left: 8px;
+}
+
+.text-center {
+    text-align: center;
+    margin-top: 10px; /* Adjust as needed */
+  
+  }
+
+  .text-center button {
+    background-color: #007bff; /* Blue color, you can change it */
+    width: 150px;
+    color: #fff; /* White text color */
+    padding: 10px 20px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 5px; /* Rounded corners */
+    cursor: pointer;
+    transition: background-color 0.3s ease; /* Smooth transition */
+  }
+
+  .text-center button:hover {
+    background-color: #0056b3; /* Darker blue on hover, you can change it */
+  }
+
+
+  .member .pic img {
+    width: 80px; /* Set the width of the image, adjust as needed */
+    height: 80px; /* Maintain aspect ratio */
+  }
+  
+
+  /*--------------------------------------------------------------
+# Testimonials
+--------------------------------------------------------------*/
+.testimonials .testimonial-wrap {
+  padding-left: 50px;
+}
+.testimonials .testimonials-carousel, .testimonials .testimonials-slider {
+  overflow: hidden;
+}
+.testimonials .testimonial-item {
+  box-sizing: content-box;
+  padding: 10px 10px 10px 40px;
+  margin: 30px 15px;
+  min-height: 200px;
+  box-shadow: 0px 2px 12px rgba(44, 73, 100, 0.08);
+  position: relative;
+  background: #fff;
+}
+.testimonials .testimonial-item .testimonial-img {
+  width: 90px;
+  border-radius: 10px;
+  border: 6px solid #fff;
+  position: absolute;
+  left: -45px;
+}
+.testimonials .testimonial-item h3 {
+  font-size: 18px;
+  font-weight: bold;
+  margin: 10px 0 5px 0;
+  color: #111;
+}
+.testimonials .testimonial-item h4 {
+  font-size: 14px;
+  color: #999;
+  margin: 0;
+}
+.testimonials .testimonial-item .quote-icon-left, .testimonials .testimonial-item .quote-icon-right {
+  color: #badaf7;
+  font-size: 26px;
+}
+.testimonials .testimonial-item .quote-icon-left {
+  display: inline-block;
+  left: -5px;
+  position: relative;
+}
+.testimonials .testimonial-item .quote-icon-right {
+  display: inline-block;
+  right: -5px;
+  position: relative;
+  top: 10px;
+}
+.testimonials .testimonial-item p {
+  font-style: italic;
+  margin: 15px auto 15px auto;
+}
+.testimonials .swiper-pagination {
+  margin-top: 20px;
+  position: relative;
+}
+.testimonials .swiper-pagination .swiper-pagination-bullet {
+  width: 12px;
+  height: 12px;
+  background-color: #fff;
+  opacity: 1;
+  border: 1px solid #1977cc;
+}
+.testimonials .swiper-pagination .swiper-pagination-bullet-active {
+  background-color: #1977cc;
+}
+@media (max-width: 767px) {
+  .testimonials .testimonial-wrap {
+    padding-left: 0;
+  }
+  .testimonials .testimonials-carousel, .testimonials .testimonials-slider {
+    overflow: hidden;
+  }
+  .testimonials .testimonial-item {
+    padding: 30px;
+    margin: 15px;
+  }
+  .testimonials .testimonial-item .testimonial-img {
+    position: static;
+    left: auto;
+  }
+}
+
+/*** 
+
+====================================================================
+	Services Section
+====================================================================
+
+***/
+
+.services-section{
+	position:relative;
+	padding:100px 0px 70px;
+	background-color:#f5f5f5;
+}
+
+.services-block{
+	position:relative;
+	margin-bottom:30px;
+}
+
+.services-block .inner-box{
+	position:relative;
+	overflow:hidden;
+}
+
+.services-block .inner-box .image{
+	position:relative;
+	overflow:hidden;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box .image img{
+	position:relative;
+	width:100%;
+	display:block;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box:hover .image img{
+	transform:scale(1.2,1.2);
+}
+
+.services-block .inner-box .lower-content{
+	position:relative;
+	padding:22px 25px;
+	border:1px solid #dddddd;
+	border-top:none;
+}
+
+.services-block .inner-box .lower-content h3{
+	position:relative;
+	color:#000048;
+	z-index:1;
+	font-size:20px;
+	font-weight:700;
+	line-height:1.3em;
+}
+
+.services-block .inner-box .lower-content h3 a{
+	position:relative;
+	color:#000048;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box:hover .lower-content .text,
+.services-block .inner-box:hover .lower-content h3 a{
+	color:#ffffff;
+}
+
+.services-block .inner-box .lower-content .text{
+	position:relative;
+	color:#777777;
+	z-index:1;
+	font-size:15px;
+	line-height:1.8em;
+	margin-top:10px;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box .lower-content .upper-layer{
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:50%;
+}
+
+.services-block .inner-box .lower-content .upper-layer:before{
+	position:absolute;
+	content:'';
+	left:0px;
+	top:0px;
+	width:0px;
+	height:50%;
+	background-color:#222222;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box .lower-content .upper-layer:after{
+	position:absolute;
+	content:'';
+	right:0px;
+	bottom:0px;
+	width:0px;
+	height:50%;
+	background-color:#222222;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box:hover .lower-content .upper-layer:before,
+.services-block .inner-box:hover .lower-content .upper-layer:after{
+	width:100%;
+}
+
+.services-block .inner-box .lower-content .lower-layer{
+	position:absolute;
+	left:0px;
+	bottom:0px;
+	width:100%;
+	height:50%;
+}
+
+.services-block .inner-box .lower-content .lower-layer:before{
+	position:absolute;
+	content:'';
+	left:0px;
+	top:0px;
+	width:0px;
+	height:50%;
+	background-color:#222222;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box .lower-content .lower-layer:after{
+	position:absolute;
+	content:'';
+	right:0px;
+	bottom:0px;
+	width:0px;
+	height:50%;
+	background-color:#222222;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box:hover .lower-content .lower-layer:before,
+.services-block .inner-box:hover .lower-content .lower-layer:after{
+	width:100%;
+}
+
+/* Services Block Two */
+
+.services-block-two{
+	position:relative;
+	margin-bottom:30px;
+}
+
+.services-block-two .inner-box{
+	position:relative;
+	padding:22px 25px;
+	min-height:140px;
+	padding-right:140px;
+	border:1px solid #dddddd;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block-two .inner-box:before{
+	position:absolute;
+	content:'';
+	left:0px;
+	top:0px;
+	width:100%;
+	height:1px;
+	background-color:#ffffff;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block-two .inner-box:hover::before{
+	height:100%;
+}
+
+.services-block-two .inner-box h3{
+	position:relative;
+	color:#000048;
+	z-index:1;
+	font-size:20px;
+	font-weight:700;
+	line-height:1.3em;
+}
+
+.services-block-two .inner-box h3 a{
+	position:relative;
+	color:#000048;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block-two .inner-box h3 a:hover{
+	color:#ffaa00;
+}
+
+.services-block-two .inner-box .text{
+	position:relative;
+	color:#777777;
+	z-index:1;
+	font-size:15px;
+	line-height:1.8em;
+	margin-top:10px;
+}
+
+.services-block-two .inner-box .image{
+	position: absolute;
+	right:0px;
+	top:0px;
+	overflow:hidden;
+	width:140px;
+	height:140px;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block-two .inner-box:hover{
+	box-shadow:0px 0px 25px rgba(0,0,0,0.15);
+}
+
+
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 200px; /* Adjust the maximum width as needed */
+    margin: 25px;
+}
+
+.video-container {
+    position: relative;
+}
+
+.video-player {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.card-content h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+
+.videos-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /* Enable horizontal scrolling if necessary */
+}
+
+.card {
+    flex: 0 0 auto;
+    width: 300px; /* Adjust the width of each card as needed */
+    margin-right: 20px; /* Adjust the spacing between cards */
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Aspect ratio (16:9) */
+}
+
+.video-player {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.card-content h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+
+
+/*Header Middle*/
+.header-middle {
+	padding: 30px;
+}
+.hm-searchbox {
+	display: flex;
+	position: relative;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #e1e1e1;
+	min-width: 638px;
+	height: 45px;
+	float: left;
+}
+.hm-searchbox .nice-select.select-search-category {
+	width: auto;
+	line-height: 43px;
+	height: 43px;
+	margin: 0;
+	border: 0;
+	padding: 0 28px 0 25px;
+	color: #242424;
+	font-size: 13px;
+	border-radius: 15px 0 0 15px;
+	font-family: 'Rubik',sans-serif;
+	font-weight: 400;
+	position: relative;
+}
+.select-search-category ul.list {
+	height: 440px;
+	overflow-y: auto;
+	overscroll-behavior-x: none;
+}
+.hm-searchbox .current::after {
+	content: "";
+	position: absolute;
+	display: block;
+	height: 22px;
+	width: 1px;
+	background: #e1e1e1;
+	top: 10px;
+	right: -10px;
+	font-size: 13px;
+}
+.hm-searchbox .nice-select.select-search-category::before {
+		right: 30px;
+		top: 25px;
+		color: #7e7e7e;
+}
+.hm-searchbox input {
+		font-size: 13px;
+		color: #a5a5a5;
+		height: 45px;
+		background: transparent;
+		border: none;
+		width: 100%;
+		padding: 0 60px 0 33px;
+}
+/*Header Middle Right*/
+.header-middle-right {
+		display: flex;
+		justify-content: flex-end;
+}
+/*Header Middle Wishlist*/
+.hm-wishlist {
+	float: left;
+	margin-right: 25px;
+	position: relative;
+}
+.hm-wishlist > a {
+	border: 1px solid #e1e1e1;
+	font-size: 20px;
+	color: #242424;
+	width: 45px;
+	text-align: center;
+	height: 45px;
+	line-height: 45px;
+	display: block;
+	transition: all 0.3s ease-in-out;
+}
+.hm-wishlist > a:hover {
+	border-color: #fed700;
+	color: #fed700;
+}
+
+button.li-btn {
+	border: none;
+	background: #fed700;
+	color: #242424;
+	font-size: 20px;
+	width: 45px;
+	border-radius: 0 2px 2px 0;
+	height: 45px;
+	line-height: 45px;
+	position: absolute;
+	right: -1px;
+	top: -1px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+button.li-btn:hover {
+	background: #333333;
+	color: #ffffff;
+}
+a.links, 
+a.links-2, 
+a.review-links {
+	background: #fed700 none repeat scroll 0 0;
+	color: #242424;
+	display: inline-block;
+	font-family: Montserrat;
+	font-size: 14px;
+	font-weight: 700;
+	height: 50px;
+	line-height: 50px;
+	position: relative;
+	text-transform: uppercase;
+	transition: all 0.3s ease-in-out 0s;
+	width: 170px;
+	text-align: center;
+}
+a.links:hover,
+a.links-2:hover {
+	background: #333333 none repeat scroll 0 0;
+	color: #fff;
+}
+a.review-links {
+	background: #242424;
+	color: #ffffff;
+	width: 205px;
+	height: 40px;
+	line-height: 40px;
+}
+a.review-links:hover {
+	background: #fed700;
+}
+
+#items-container .row > * {
+    margin-bottom: 20px;
+  }
+</style>
+
+
+<!-- Services Section -->
+<!-- <section class="services-section" style="margin-top: 1cm;">
+  <div class="auto-container">
+    <div class="row clearfix">
+      {% for unit in presentation %}
+       
+        <div class="services-block-two col-lg-3 col-md-6 col-sm-12">
+          <div class="inner-box">
+            <div class="image">
+              <img src="{{ unit.profile_image.url }}" class="testimonial-img" alt="">
+            </div>                    
+            <h3><a href="#">{{ unit.name }}</a></h3>
+            <div class="text" style="font-size: 12px;">{{ unit.topic }}</div>
+
+            <div class="text-center">
+              <div class="text"><a href="{{ unit.powerpoint_file.url }}"target="_blank"><i class="fa fa-download"></i> Download</a></div>
+              <div class="text"><a href="#" onclick="openPowerPoint('{{ unit.powerpoint_file.url }}')"><i class="fa fa-eye"></i> View</a></div>
+            </div>
+          
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:4 %}
+          </div><div class="row clearfix">
+        {% endif %}
+      {% endfor %}
+    </div>  
+  </div>
+</section> -->
+<!-- End Services Section -->
+
+
+<!-- <div class="footer-column col-lg-4 col-md-6 col-sm-12" style="margin-top: 5cm;">
+  <div class="footer-widget news-widget">
+    <div class="single-item-carousel owl-carousel owl-theme">
+      {% for unit in presentation %}
+        <div class="slide">
+          <div class="news-widget-block">
+            <div class="widget-inner">
+              <div class="image">
+                <img height="" src="{{ unit.profile_image.url }}" alt="" />
+              </div>
+              <div class="post-date">{{ unit.name }}</div>
+              <div class="text" style="font-size: 12px;">{{ unit.topic }}</div>
+              <span>
+                <a href="{{ unit.powerpoint_file.url }}" target="_blank" style="font-size: 12px;">
+                  <i class="fa fa-download"></i> Download
+                </a>
+              </span>&nbsp;&nbsp;
+              <span>
+                <a href="#" onclick="openPowerPoint('{{ unit.powerpoint_file.url }}')" style="font-size: 12px;">
+                  <i class="fa fa-eye"></i> View
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:4 %}
+          </div><div class="single-item-carousel owl-carousel owl-theme">
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div> -->
+
+
+
+<div class="footer-column col-lg-12 col-md-6 col-sm-12" style="margin-top: 2cm; margin-bottom: 2cm;">
+
+
+  <section style="display: flex; justify-content: center; margin-bottom: 0px; padding-bottom: 0px;">
+    <div class="body-wrapper">
+      <header>
+        <div class="col-lg-9 pl-0 ml-sm-5 ml-xs-5">
+          <form id="filter-form" class="hm-searchbox">
+            <select id="cancer-type-select" class="nice-select select-search-category">
+              <option value="0">All</option>
+              {% for unit in presentation %}
+                <option value="{{ unit.id }}">{{ unit.name }}</option>
+              {% endfor %}                  
+            </select>
+            <input id="filter-input" type="text" placeholder="Filter by Title ...">
+            <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
+          </form>
+        </div>
+      </header>
+    </div>
+  </section>
+  <div class="footer-widget news-widget">
+    <div class="row clearfix">
+      {% for unit in presentation %}
+        <div class="col-lg-4 col-md-3 col-sm-6 cad">
+          <div class="news-widget-block">
+            <div class="widget-inner">
+              <!-- <div class="image">
+                <img height="60%" src="{{ unit.profile_image.url }}" alt="" />
+              </div> -->
+              
+              <div class="image" style="padding-top: 5px;">
+              <img src="{{ unit.profile_image.url }}" alt="" />
+              </div>
+              
+              <div class="post-date">{{ unit.name }}</div>
+              <div class="" style="margin-top: 0px; margin-bottom: opx; padding-top: 0px; padding-bottom: 0px; font-size: 12px; color: #000048;">{{ unit.organization }}</div>
+              <div class="text" style="font-size: 12px;">{{ unit.topic }}</div>
+              <span>
+                <a href="{{ unit.powerpoint_file.url }}" target="_blank" style="font-size: 12px;">
+                  <i class="fa fa-download"></i> Download
+                </a>
+              </span>&nbsp;&nbsp;
+              <span>
+                <a href="#" onclick="openPowerPoint('{{ unit.powerpoint_file.url }}')" style="font-size: 12px;">
+                  <i class="fa fa-eye"></i> View
+                </a>
+              </span>
+            </div>
+          </div>
+        </div>
+        {% if forloop.counter|divisibleby:4 %}
+          </div><div class="row clearfix">
+        {% endif %}
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+
+  <script src="{% static 'card/assets/vendor/purecounter/purecounter.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/php-email-form/validate.js' %}"></script>
+  <!-- Template Main JS File -->
+  <script src="{% static 'card/assets/js/main.js' %}"></script>
+  <!-- Custom template scripts -->
+  <script src="{% static 'card/assets/js/magister.js' %}"></script>
+
+
+
+  <script src="{% static 'card/js/jquery.js' %}"></script>
+  <script src="{% static 'card/js/popper.min.js' %}"></script>
+  <script src="{% static 'card/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'card/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+  <script src="{% static 'card/js/jquery.fancybox.js' %}"></script>
+  <script src="{% static 'card/js/appear.js' %}"></script>
+  <script src="{% static 'card/js/owl.js' %}"></script>
+  <script src="{% static 'card/js/wow.js' %}"></script>
+  <script src="{% static 'card/js/jquery-ui.js' %}"></script>
+  <script src="{% static 'card/js/script.js' %}"></script>
+  <script src="{% static 'card/js/color-settings.js' %}"></script>
+
+
+<script>
+  function openPowerPoint(url) {
+      var viewerUrl = 'https://docs.google.com/viewer?url=' + encodeURIComponent(url);
+      window.open(viewerUrl, '_blank');
+  }
+  </script>
+
+<script>
+  $(document).ready(function() {
+      $('#filter-input').on('input', function() {
+          var searchText = $(this).val().toLowerCase();
+          $('.cad').hide().filter(function() {
+              return $(this).data('name').toLowerCase().includes(searchText);
+          }).show();
+      });
+  });
+</script>
+{% endblock content %}

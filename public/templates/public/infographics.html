@@ -1,0 +1,977 @@
+{% extends "public/base.html" %}
+{% load static %}
+{% block content %}
+
+
+<link href="{% static 'card/assets/vendor/animate.css/animate.min.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/aos/aos.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/bootstrap/css/bootstrap.min.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/bootstrap-icons/bootstrap-icons.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/glightbox/css/glightbox.min.css' %}" rel="stylesheet">
+<link href="{% static 'card/assets/vendor/swiper/swiper-bundle.min.css' %}" rel="stylesheet">
+<!-- Template Main CSS File -->
+<!-- <link href="{% static 'card/assets/css/style.css' %}" rel="stylesheet"> -->
+
+
+
+<!-- Stylesheets -->
+<link href="{% static 'card/css/style.css' %}" rel="stylesheet">
+<link href="{% static 'card/css/slick.css' %}" rel="stylesheet">
+<link href="{% static 'card/css/responsive.css' %}" rel="stylesheet">
+<!--Color Switcher Mockup-->
+<link href="{% static 'card/css/color-switcher-design.css' %}" rel="stylesheet">
+<!--Color Themes-->
+<link id="theme-color-file" href="{% static 'card/css/color-themes/default-theme.css' %}" rel="stylesheet">
+
+
+
+<style>
+body {
+    background: #dad8d8;
+    color: #666666;
+    font-family: "Open Sans", sans-serif;
+}
+
+.featured-services .icon-box {
+  padding: 30px;
+  position: relative;
+  overflow: hidden;
+  background: #fff;
+  box-shadow: 0 0 29px 0 rgba(68, 88, 144, 0.12);
+  transition: all 0.3s ease-in-out;
+  border-radius: 8px;
+  z-index: 1;
+}
+.featured-services .icon-box::before {
+  content: "";
+  position: absolute;
+  background: #d9f1f2;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  top: 100%;
+  transition: all 0.3s;
+  z-index: -1;
+}
+.featured-services .icon-box:hover::before {
+  background: #3fbbc0;
+  top: 0;
+  border-radius: 0px;
+}
+.featured-services .icon {
+  margin-bottom: 15px;
+}
+.featured-services .icon i {
+  font-size: 48px;
+  line-height: 1;
+  color: #3fbbc0;
+  transition: all 0.3s ease-in-out;
+}
+.featured-services .title {
+  font-weight: 700;
+  margin-bottom: 15px;
+  font-size: 18px;
+}
+.featured-services .title a {
+  color: #111;
+}
+.featured-services .description {
+  font-size: 15px;
+  line-height: 28px;
+  margin-bottom: 0;
+}
+.featured-services .icon-box:hover .title a, .featured-services .icon-box:hover .description {
+  color: #fff;
+}
+.featured-services .icon-box:hover .icon i {
+  color: #fff;
+}
+
+/*--------------------------------------------------------------
+# Doctors
+--------------------------------------------------------------*/
+.doctors .member {
+  margin-bottom: 20px;
+  overflow: hidden;
+  text-align: center;
+  border-radius: 4px;
+  background: #fff;
+  box-shadow: 0px 2px 15px rgba(63, 187, 192, 0.1);
+}
+.doctors .member .member-img {
+  position: relative;
+  overflow: hidden;
+}
+.doctors .member .social {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  height: 40px;
+  opacity: 0;
+  transition: ease-in-out 0.3s;
+  background: rgba(255, 255, 255, 0.85);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.doctors .member .social a {
+  transition: color 0.3s;
+  color: #555555;
+  margin: 0 10px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+.doctors .member .social a i {
+  line-height: 0;
+}
+.doctors .member .social a:hover {
+  color: #3fbbc0;
+}
+.doctors .member .social i {
+  font-size: 18px;
+  margin: 0 2px;
+}
+.doctors .member .member-info {
+  padding: 25px 15px;
+}
+.doctors .member .member-info h4 {
+  font-weight: 700;
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #555555;
+}
+.doctors .member .member-info span {
+  display: block;
+  font-size: 13px;
+  font-weight: 400;
+  color: #aaaaaa;
+}
+.doctors .member .member-info p {
+  font-style: italic;
+  font-size: 14px;
+  line-height: 26px;
+  color: #777777;
+}
+.doctors .member:hover .social {
+  opacity: 1;
+}
+
+
+/*** 
+
+====================================================================
+	Team Section
+====================================================================
+
+***/
+
+.team-section{
+	position: relative;
+	padding: 95px 0px 65px;
+}
+
+.team-member{
+	position:relative;
+	margin-bottom:50px;
+}
+
+.team-member .inner-box{
+	position:relative;
+	text-align:center;
+	overflow:hidden;
+	border:1px solid #ececec;
+}
+
+.team-member .image-box{
+	position:relative;
+	display:block;
+	background:#fbfbfb;
+	transition: all 500ms ease;
+	-webkit-transition: all 500ms ease;
+	-ms-transition: all 500ms ease;
+	-o-transition: all 500ms ease;
+	-moz-transition: all 500ms ease;
+}
+
+.team-member .image-box .image{
+	position:relative;
+	display:block;
+	padding-top: 0px;
+	transition: all 700ms ease;
+	-webkit-transition: all 700ms ease;
+	-ms-transition: all 700ms ease;
+	-o-transition: all 700ms ease;
+	-moz-transition: all 700ms ease;
+}
+
+.team-member .inner-box:hover .image-box .image{
+	-webkit-transform:translateX(-50px);
+	-ms-transform:translateX(-50px);
+	-o-transform:translateX(-50px);
+	-moz-transform:translateX(-50px);
+	transform:translateX(-40px);
+}
+
+.team-member .image-box .image img{
+	position:relative;
+	display:inline-block;
+	max-width:100%;
+}
+
+.team-member .image-box .social-icon-two{
+	position:absolute;
+	right:15px;
+	top:0px;
+	text-align:center;
+	-webkit-transform:translateY(-100%);
+	-ms-transform:translateY(-100%);
+	-o-transform:translateY(-100%);
+	-moz-transform:translateY(-100%);
+	transform:translateY(-100%);
+	transition: all 1000ms ease;
+	-webkit-transition: all 1000ms ease;
+	-ms-transition: all 1000ms ease;
+	-o-transition: all 1000ms ease;
+	-moz-transition: all 1000ms ease;
+}
+
+.team-member .inner-box:hover .image-box .social-icon-two{
+	top:15px;
+	-webkit-transform:translateY(0%);
+	-ms-transform:translateY(0%);
+	-o-transform:translateY(0%);
+	-moz-transform:translateY(0%);
+	transform:translateY(0%);
+}
+
+.team-member .lower-content{
+	position:relative;
+	margin-left:2px;
+	margin-right:2px;
+	margin-top:-90px;
+	margin-bottom:0px;
+	padding:15px 5px 15px;
+	border:1px solid #ececec;
+	background-color:#ffffff;
+}
+
+.team-member .lower-content h6{
+	position:relative;
+	font-weight:700;
+	text-transform:capitalize;
+}
+
+.team-member .lower-content h6 a{
+	color:#222222;
+	transition: all 500ms ease;
+	-webkit-transition: all 500ms ease;
+	-ms-transition: all 500ms ease;
+	-o-transition: all 500ms ease;
+	-moz-transition: all 500ms ease;
+}
+
+.team-member .lower-content h6 a:hover{
+	color:#13b5ea;
+}
+
+.team-member .lower-content .designation{
+	position:relative;
+	font-size:14px;
+	color:#13b5ea;
+	text-transform:capitalize;
+}
+
+.team-member .lower-content .text{
+	position:relative;
+	color:#222222;
+	font-size:14px;
+	line-height:1.8em;
+	margin-top:8px;
+}
+
+
+
+.services-section{
+	position:relative;
+	padding:0px 0px 0px;
+	/* background-color:#f5f5f5;
+    margin-top: 1cm; */
+}
+
+.services-block{
+	position:relative;
+	margin-bottom:30px;
+}
+
+.services-block .inner-box{
+	position:relative;
+	overflow:hidden;
+}
+
+.services-block .inner-box .image{
+	position:relative;
+	overflow:hidden;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box .image img{
+	position:relative;
+	width:100%;
+	display:block;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box:hover .image img{
+	transform:scale(1.2,1.2);
+}
+
+.services-block .inner-box .lower-content{
+	position:relative;
+	padding:22px 25px;
+	border:1px solid #dddddd;
+	border-top:none;
+}
+
+.services-block .inner-box .lower-content h3{
+	position:relative;
+	color:#000048;
+	z-index:1;
+	font-size:20px;
+	font-weight:700;
+	line-height:1.3em;
+}
+
+.services-block .inner-box .lower-content h3 a{
+	position:relative;
+	color:#000048;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box:hover .lower-content .text,
+.services-block .inner-box:hover .lower-content h3 a{
+	color:#ffffff;
+}
+
+.services-block .inner-box .lower-content .text{
+	position:relative;
+	color:#777777;
+	z-index:1;
+	font-size:15px;
+	line-height:1.8em;
+	margin-top:10px;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box .lower-content .upper-layer{
+	position:absolute;
+	left:0px;
+	top:0px;
+	width:100%;
+	height:50%;
+}
+
+.services-block .inner-box .lower-content .upper-layer:before{
+	position:absolute;
+	content:'';
+	left:0px;
+	top:0px;
+	width:0px;
+	height:50%;
+	background-color:#222222;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box .lower-content .upper-layer:after{
+	position:absolute;
+	content:'';
+	right:0px;
+	bottom:0px;
+	width:0px;
+	height:50%;
+	background-color:#222222;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box:hover .lower-content .upper-layer:before,
+.services-block .inner-box:hover .lower-content .upper-layer:after{
+	width:100%;
+}
+
+.services-block .inner-box .lower-content .lower-layer{
+	position:absolute;
+	left:0px;
+	bottom:0px;
+	width:100%;
+	height:50%;
+}
+
+.services-block .inner-box .lower-content .lower-layer:before{
+	position:absolute;
+	content:'';
+	left:0px;
+	top:0px;
+	width:0px;
+	height:50%;
+	background-color:#222222;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box .lower-content .lower-layer:after{
+	position:absolute;
+	content:'';
+	right:0px;
+	bottom:0px;
+	width:0px;
+	height:50%;
+	background-color:#222222;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block .inner-box:hover .lower-content .lower-layer:before,
+.services-block .inner-box:hover .lower-content .lower-layer:after{
+	width:100%;
+}
+
+/* Services Block Two */
+
+.services-block-two{
+	position:relative;
+	margin-bottom:30px;
+}
+
+.services-block-two .inner-box{
+	position:relative;
+	padding:22px 25px;
+	min-height:40px;
+	padding-right:140px;
+	border:1px solid #dddddd;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block-two .inner-box:before{
+	position:absolute;
+	content:'';
+	left:0px;
+	top:0px;
+	width:100%;
+	height:1px;
+	background-color:#ffffff;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block-two .inner-box:hover::before{
+	height:100%;
+}
+
+.services-block-two .inner-box h3{
+	position:relative;
+	color:#000048;
+	z-index:1;
+	font-size:20px;
+	font-weight:700;
+	line-height:1.3em;
+}
+
+.services-block-two .inner-box h3 a{
+	position:relative;
+	color:#000048;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block-two .inner-box h3 a:hover{
+	color:#ffaa00;
+}
+
+.services-block-two .inner-box .text{
+	position:relative;
+	color:#777777;
+	z-index:1;
+	font-size:15px;
+	line-height:1.8em;
+	margin-top:10px;
+}
+
+.services-block-two .inner-box .image{
+	position: absolute;
+	right:0px;
+	top:0px;
+	overflow:hidden;
+	width:140px;
+	height:140px;
+	transition:all 500ms ease;
+	-moz-transition:all 500ms ease;
+	-webkit-transition:all 500ms ease;
+	-ms-transition:all 500ms ease;
+	-o-transition:all 500ms ease;
+}
+
+.services-block-two .inner-box:hover{
+	box-shadow:0px 0px 25px rgba(0,0,0,0.15);
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    max-width: 300px; /* Adjust the maximum width as needed */
+    margin: 0 auto; /* Center the video */
+}
+
+.video-player {
+    width: 100%;
+    height: auto;
+}
+
+
+.card {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    overflow: hidden;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    max-width: 200px; /* Adjust the maximum width as needed */
+    margin: 25px;
+}
+
+.video-container {
+    position: relative;
+}
+
+.video-player {
+    width: 100%;
+    height: auto;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.card-content h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+
+.videos-row {
+    display: flex;
+    flex-wrap: nowrap;
+    overflow-x: auto; /* Enable horizontal scrolling if necessary */
+}
+
+.card {
+    flex: 0 0 auto;
+    width: 300px; /* Adjust the width of each card as needed */
+    margin-right: 20px; /* Adjust the spacing between cards */
+}
+
+.video-container {
+    position: relative;
+    width: 100%;
+    padding-bottom: 56.25%; /* Aspect ratio (16:9) */
+}
+
+.video-player {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+}
+
+.card-content {
+    padding: 10px;
+}
+
+.card-content h3 {
+    font-size: 18px;
+    margin-bottom: 5px;
+}
+
+.card-content p {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 0;
+}
+
+
+
+/*Header Middle*/
+.header-middle {
+	padding: 30px;
+}
+.hm-searchbox {
+	display: flex;
+	position: relative;
+	background: #fff;
+	border-radius: 5px;
+	border: 1px solid #e1e1e1;
+	min-width: 638px;
+	height: 45px;
+	float: left;
+}
+.hm-searchbox .nice-select.select-search-category {
+	width: auto;
+	line-height: 43px;
+	height: 43px;
+	margin: 0;
+	border: 0;
+	padding: 0 28px 0 25px;
+	color: #242424;
+	font-size: 13px;
+	border-radius: 15px 0 0 15px;
+	font-family: 'Rubik',sans-serif;
+	font-weight: 400;
+	position: relative;
+}
+.select-search-category ul.list {
+	height: 440px;
+	overflow-y: auto;
+	overscroll-behavior-x: none;
+}
+.hm-searchbox .current::after {
+	content: "";
+	position: absolute;
+	display: block;
+	height: 22px;
+	width: 1px;
+	background: #e1e1e1;
+	top: 10px;
+	right: -10px;
+	font-size: 13px;
+}
+.hm-searchbox .nice-select.select-search-category::before {
+		right: 30px;
+		top: 25px;
+		color: #7e7e7e;
+}
+.hm-searchbox input {
+		font-size: 13px;
+		color: #a5a5a5;
+		height: 45px;
+		background: transparent;
+		border: none;
+		width: 100%;
+		padding: 0 60px 0 33px;
+}
+/*Header Middle Right*/
+.header-middle-right {
+		display: flex;
+		justify-content: flex-end;
+}
+/*Header Middle Wishlist*/
+.hm-wishlist {
+	float: left;
+	margin-right: 25px;
+	position: relative;
+}
+.hm-wishlist > a {
+	border: 1px solid #e1e1e1;
+	font-size: 20px;
+	color: #242424;
+	width: 45px;
+	text-align: center;
+	height: 45px;
+	line-height: 45px;
+	display: block;
+	transition: all 0.3s ease-in-out;
+}
+.hm-wishlist > a:hover {
+	border-color: #fed700;
+	color: #fed700;
+}
+
+button.li-btn {
+	border: none;
+	background: #fed700;
+	color: #242424;
+	font-size: 20px;
+	width: 45px;
+	border-radius: 0 2px 2px 0;
+	height: 45px;
+	line-height: 45px;
+	position: absolute;
+	right: -1px;
+	top: -1px;
+	transition: all 0.3s ease-in-out;
+	cursor: pointer;
+}
+button.li-btn:hover {
+	background: #333333;
+	color: #ffffff;
+}
+a.links, 
+a.links-2, 
+a.review-links {
+	background: #fed700 none repeat scroll 0 0;
+	color: #242424;
+	display: inline-block;
+	font-family: Montserrat;
+	font-size: 14px;
+	font-weight: 700;
+	height: 50px;
+	line-height: 50px;
+	position: relative;
+	text-transform: uppercase;
+	transition: all 0.3s ease-in-out 0s;
+	width: 170px;
+	text-align: center;
+}
+a.links:hover,
+a.links-2:hover {
+	background: #333333 none repeat scroll 0 0;
+	color: #fff;
+}
+a.review-links {
+	background: #242424;
+	color: #ffffff;
+	width: 205px;
+	height: 40px;
+	line-height: 40px;
+}
+a.review-links:hover {
+	background: #fed700;
+}
+
+#items-container .row > * {
+    margin-bottom: 20px;
+  }
+
+</style>
+
+
+ <!-- ======= Doctors Section ======= -->
+ <!-- <section id="doctors" class="doctors section-bg" style="margin-top: 2cm;">
+  <div class="container" data-aos="fade-up">
+
+    <div class="row">
+
+      <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+        <div class="member" data-aos="fade-up" data-aos-delay="100">
+          <div class="member-img">
+            <img src="{% static 'img/infographics/breastcancer.png' %}" class="img-fluid" alt="">
+          
+          </div>
+          <div class="member-info">
+            <h4>Breast Cancer</h4>
+        
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+        <div class="member" data-aos="fade-up" data-aos-delay="100">
+          <div class="member-img">
+            <img src="{% static 'img/infographics/lungs.png' %}" class="img-fluid" alt="">
+          
+          </div>
+          <div class="member-info">
+            <h4>Lung Cancer</h4>
+        
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+        <div class="member" data-aos="fade-up" data-aos-delay="100">
+          <div class="member-img">
+            <img src="{% static 'img/infographics/lung cancer.png' %}" class="img-fluid" alt="">
+          
+          </div>
+          <div class="member-info">
+            <h4>Breast Cancer</h4>
+        
+          </div>
+        </div>
+      </div>
+
+      <div class="col-lg-3 col-md-6 d-flex align-items-stretch">
+        <div class="member" data-aos="fade-up" data-aos-delay="100">
+          <div class="member-img">
+            <img src="{% static 'img/infographics/BreastCancerAwareness.png' %}" class="img-fluid" alt="">
+          
+          </div>
+          <div class="member-info">
+            <h4>Breast Cancer</h4>
+        
+          </div>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section> -->
+<!-- End Doctors Section -->
+
+<section style="margin-top: 2cm; display: flex; justify-content: center; margin-bottom: 0px; padding-bottom: 0px;">
+  <div class="body-wrapper">
+    <header>
+      <div class="col-lg-9 pl-0 ml-sm-5 ml-xs-5">
+        <form id="filter-form" class="hm-searchbox">
+          <select id="cancer-type-select" class="nice-select select-search-category">
+            <option value="0">All</option>
+            {% for unit in video %}
+              <option value="{{ unit.id }}">{{ unit.title }}</option>
+            {% endfor %}                  
+          </select>
+          <input id="filter-input" type="text" placeholder="Filter by Title ...">
+          <button class="li-btn" type="submit"><i class="fa fa-search"></i></button>
+        </form>
+      </div>
+    </header>
+  </div>
+</section>
+
+
+<section class="team-section" style="margin-top: -2cm;">
+  <div class="auto-container">
+    
+    <div class="row clearfix">
+            
+              <!--Team Member-->
+              <div class="team-member col-lg-3 col-md-6 col-sm-12">
+                <div class="inner-box wow fadeIn" data-wow-delay="0ms" data-wow-duration="1500ms">
+                    <div class="image-box">
+                        <figure class="image"><img src="{% static 'img/infographics/Risk-Factors-of-Lung-Cancer2.jpg' %}" alt=""></figure>
+                          <!-- <ul class="social-icon-two">
+                            <li><a href="#"><span class="fa fa-facebook-f"></span></a></li>
+                              <li><a href="#"><span class="fa fa-twitter"></span></a></li>
+                              <li><a href="#"><span class="fa fa-google-plus"></span></a></li>
+                              <li><a href="#"><span class="fa fa-instagram"></span></a></li>
+                          </ul> -->
+                      </div>
+                      <div class="lower-content">
+                        <h6><a href="#">Lung Cancer</a></h6>
+                          <!-- <div class="designation">Ceo</div>
+                          <div class="text">As more and more people are turning to organic</div> -->
+                      </div>
+                  </div>
+              </div>
+              
+              <!--Team Member-->
+              <div class="team-member col-lg-3 col-md-6 col-sm-12">
+                <div class="inner-box wow fadeIn" data-wow-delay="300ms" data-wow-duration="1500ms">
+                    <div class="image-box">
+                        <figure class="image"><img src="{% static 'img/infographics/Prostate2.png' %}" alt=""></figure>
+                          
+                      </div>
+                      <div class="lower-content">
+                        <h6><a href="#">Prostate Cancer</a></h6>
+                         
+                        
+                      </div>
+                  </div>
+              </div>
+              
+              <!--Team Member-->
+              <div class="team-member col-lg-3 col-md-6 col-sm-12">
+                <div class="inner-box wow fadeIn" data-wow-delay="600ms" data-wow-duration="1500ms">
+                    <div class="image-box">
+                        <figure class="image"><img src="{% static 'img/infographics/125631778-Breast-Cancer-Trends2.jpg' %}" alt=""></figure>
+                       
+                      </div>
+                      <div class="lower-content">
+                        <h6><a href="#">Breast Cancer</a></h6>
+                         
+                      </div>
+                  </div>
+              </div>
+              
+              <!--Team Member-->
+              <div class="team-member col-lg-3 col-md-6 col-sm-12">
+                <div class="inner-box wow fadeIn" data-wow-delay="900ms" data-wow-duration="1500ms">
+                    <div class="image-box">
+                        <figure class="image"><img src="{% static 'img/infographics/BreastCancerAwareness.png' %}" alt=""></figure>
+                         
+                      </div>
+                      <div class="lower-content">
+                        <h6><a href="#">Breast Cancer</a></h6>
+                          
+                      </div>
+                  </div>
+              </div>
+              
+    </div>
+    
+  </div>
+</section>
+<!--End Team Section-->
+
+
+
+  <script src="{% static 'card/assets/vendor/purecounter/purecounter.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/aos/aos.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/bootstrap/js/bootstrap.bundle.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/glightbox/js/glightbox.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/isotope-layout/isotope.pkgd.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/swiper/swiper-bundle.min.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/waypoints/noframework.waypoints.js' %}"></script>
+  <script src="{% static 'card/assets/vendor/php-email-form/validate.js' %}"></script>
+  <!-- Template Main JS File -->
+  <script src="{% static 'card/assets/js/main.js' %}"></script>
+  <!-- Custom template scripts -->
+  <script src="{% static 'card/assets/js/magister.js' %}"></script>
+
+
+
+  <script src="{% static 'card/js/jquery.js' %}"></script>
+  <script src="{% static 'card/js/popper.min.js' %}"></script>
+  <script src="{% static 'card/js/bootstrap.min.js' %}"></script>
+  <script src="{% static 'card/js/jquery.mCustomScrollbar.concat.min.js' %}"></script>
+  <script src="{% static 'card/js/jquery.fancybox.js' %}"></script>
+  <script src="{% static 'card/js/appear.js' %}"></script>
+  <script src="{% static 'card/js/owl.js' %}"></script>
+  <script src="{% static 'card/js/wow.js' %}"></script>
+  <script src="{% static 'card/js/jquery-ui.js' %}"></script>
+  <script src="{% static 'card/js/script.js' %}"></script>
+  <script src="{% static 'card/js/color-settings.js' %}"></script>
+
+{% endblock content %}
